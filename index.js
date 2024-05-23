@@ -23,11 +23,10 @@ const checkMxRecord = (domain) => {
 };
 
 app.post('/validate-email',async (req,res)=>{
-
     const email= req.body.email;
 
     if(!email){
-        return res.status(400).json({message:"Please provide email"});
+        return res.status(400).json({message:"Please provide email to validate"});
     }
 
     const isValidSyntax=validator.validate(email);
