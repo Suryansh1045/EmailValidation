@@ -2,12 +2,14 @@ var express= require('express');
 var validator = require("email-validator");
 const bodyParser = require('body-parser');
 const dns = require('dns');
+require('dotenv').config();
 
+const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(bodyParser.json());
 
 const checkMxRecord = (domain) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {  
         dns.resolveMx(domain, (err, addresses) => {
             if (err) {
                 console.error("Error", err);
@@ -50,7 +52,7 @@ app.post('/validate-email',async (req,res)=>{
         });
 })
 
-app.listen(4000,()=>
+app.listen(PORT,()=>
 {
-    console.log('server is running on port 4000');
+    console.log(`server is running on port ${PORT}`);
 })
